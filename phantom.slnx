@@ -1,0 +1,36 @@
+<Solution>
+  <Folder Name="/configurations/" Id="02ea681e-c7d8-13c7-8484-4ac65e1b71e8">
+    <File Path=".config/stylecop.json" />
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="directory.build.props" />
+    <File Path="directory.packages.props" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Folder Name="/docs/" Id="d8e0215e-4d5d-403a-a8c8-e78def699727">
+    <File Path="changelog.md" />
+    <File Path="license" />
+    <File Path="readme.md" />
+  </Folder>
+  <Folder Name="/docs/issues/" Id="1b70cd38-4308-4ac1-b729-2bf5990bf430">
+    <File Path=".github/ISSUE_TEMPLATE/bug.yml" />
+    <File Path=".github/ISSUE_TEMPLATE/config.yml" />
+    <File Path=".github/ISSUE_TEMPLATE/enhancement.yml" />
+    <File Path=".github/ISSUE_TEMPLATE/feature.yml" />
+  </Folder>
+  <Folder Name="/rules/" Id="edd04a70-5278-49fd-9be1-603025ac22ab">
+    <File Path="rules/code.style.editorconfig" />
+    <File Path="rules/disabled.editorconfig" />
+    <File Path="rules/meziantou.editorconfig" />
+    <File Path="rules/roslynator.editorconfig" />
+    <File Path="rules/sonar.editorconfig" />
+    <File Path="rules/stylecop.editorconfig" />
+    <File Path="rules/underscore.editorconfig" />
+  </Folder>
+  <Folder Name="/workflows/" Id="f40ca3e0-4d7a-4571-a847-0b189e8295f7">
+    <File Path=".github/workflows/pull-request.yml" />
+  </Folder>
+  <Project Path="src/Phantom.Demo/Phantom.Demo.csproj" />
+  <Project Path="src/Phantom/Phantom.csproj" Id="a3693da4-09ad-4b50-a4a8-a5cb8266d5c1" />
+</Solution>

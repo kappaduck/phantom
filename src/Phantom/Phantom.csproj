@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup Label="Configure library">
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsAotCompatible>true</IsAotCompatible>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package info">
+    <Title>$(MSBuildProjectName)</Title>
+    <Description>$(MSBuildProjectName) is a NuGet package build on top of SDL3, designed to provide a clean and modern .NET 9.0+ API.$(MSBuildProjectName) ensures high performance and flexibility for game development and multimedia applications, while abstracting away the low-level details of SDL3 API. It's offers window management, input handling, audio, rendering and more.</Description>
+    <PackageTags>SDL;SDL3;Wrapper;Game;Multimedia</PackageTags>
+  </PropertyGroup>
+</Project>

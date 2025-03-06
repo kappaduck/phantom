@@ -1,0 +1,21 @@
+name: Enhancement
+description: Suggest an enhancement for Phantom.
+labels: ["triage"]
+type: Enhancement
+assignees:
+  - beauchama
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to suggest an enhancement. Please fill in the information below to help us understand your suggestion.
+        Please search to see if the request has already been suggested ([phantom/issues](https://github.com/kappaduck/phantom/issues))
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: >-
+        Is your enhancement request related to improving an existing feature? Please the enhancement you would like to see.
+      description: A clear and concise description of what the enhancement is.
+      placeholder: I would like to have an extension method which closes the window by clicking the close button or pressing the escape key.
+    validations:
+      required: false
