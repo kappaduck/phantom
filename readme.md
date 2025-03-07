@@ -1,23 +1,26 @@
 # Phantom
 
-Phantom is a high-performance game engine built on top of the [SDL3] library and his extensions ([SDL_image], [SDL_ttf] and [SDL_mixer]),
-designed for modern .NET 9.0+ applications.
+Phantom is a high-performance game engine built on [SDL3] and its extensions ([SDL_image], [SDL_ttf], and [SDL_mixer]), designed for modern .NET 9.0+ applications.
 
-It provides a clean, flexible, and intuitive API, making it easy to create games and multimedia applications. By abstracting the underlying SDL3 API, Phantom allows developers to focus on creating their games without worrying about the low-level details.
+With a clean, flexible, and intuitive API, Phantom eliminates the need for low-level coding, 
+allowing developers to focus entirely on building their games and multimedia applications. 
+Under the hood, it leverages SDL3’s power while maintaining a fully managed, high-level .NET experience.
 
-## Compability
+## Phantom & SDL3 Compatibility
 
-Here is a list of Phantom versions and the SDL3 versions they support:
+Below is a list of Phantom versions and the corresponding SDL3 versions they support:
 
 | Phantom Version | SDL3 Version | SDL_image Version | SDL_ttf Version | SDL_mixer Version |
 | :-------------: | :----------: | :---------------: | :-------------: | :---------------: |
 |   `>= 0.1.0`    |   `3.2.8`    |   `unsupported`   |  `unsupported`  |   `unsupported`   |
 
+> Support for SDL_image, SDL_ttf, and SDL_mixer is planned for future releases. Stay tuned!
+
 ## Cross-Platform
 
-At the moment, Phantom is only available for Windows, but it will be available for Linux and WebAssembly in the future.
+Phantom currently supports Windows, with Linux and WebAssembly support planned for future releases.
 
-> It is possible that Phantom will support other platforms but it is not planned at the moment.
+> Other platforms may be considered in the future, but there are no plans for them at this time.
 
 ## Installation
 

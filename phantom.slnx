@@ -7,6 +7,7 @@
     <File Path="directory.build.props" />
     <File Path="directory.packages.props" />
     <File Path="nuget.config" />
+    <File Path="Phantom.targets" />
   </Folder>
   <Folder Name="/docs/" Id="d8e0215e-4d5d-403a-a8c8-e78def699727">
     <File Path="changelog.md" />
