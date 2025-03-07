@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "boo": {
+      "version": "0.1.0",
+      "commands": [
+        "boo"
+      ],
+      "rollForward": false
+    }
+  }
+}

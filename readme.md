@@ -38,6 +38,34 @@ To build Phantom from source, you will need the following tools installed:
 
 > The SDK includes everything you need to build and run .NET applications on your machine.
 
+### Boo!
+
+`Boo` is a simple dotnet tool that allows you to setup Phantom and its dependencies. 
+You can install it by running the setup script in the root directory:
+
+> The script will restore/pack Boo project and install as local dotnet tool.
+
+> windows
+```sh
+./setup.bat
+```
+
+> linux
+```sh
+./setup.sh
+```
+#### Usage
+
+To install latest SDL3 version
+```bash
+dotnet boo sdl
+```
+
+To install a specific version of SDL3
+```bash
+dotnet boo sdl --version 3.2.8
+```
+
 ## Credits
 
 Phantom leverages and draws inspiration from the following projects:
