@@ -14,7 +14,9 @@ internal sealed class ExtractFile(string rootPath) : FileHandler
 
         try
         {
-            ZipFile.ExtractToDirectory(file, rootPath, overwriteFiles: true);
+            string directory = Path.Combine(rootPath, file[..file.LastIndexOf('.')]);
+
+            ZipFile.ExtractToDirectory(file, directory, overwriteFiles: true);
             File.Delete(file);
         }
         catch (Exception ex)
