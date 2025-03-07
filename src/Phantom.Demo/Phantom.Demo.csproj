@@ -7,6 +7,11 @@
     <IsPackable>false</IsPackable>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup Label="Link SDL3">
+    <None Include="$(MSBuildStartupDirectory)\SDL3\*.dll" Link="%(FileName)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" Condition="$([System.OperatingSystem]::IsWindows())" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Phantom\Phantom.csproj" />
   </ItemGroup>
