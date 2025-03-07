@@ -29,6 +29,8 @@
     <File Path="rules/underscore.editorconfig" />
   </Folder>
   <Folder Name="/setup/" Id="e10f51a3-b4be-463f-a638-8af1a03b82f7">
+    <File Path="setup.bat" />
+    <File Path="setup.sh" />
     <Project Path="src/Boo/Boo.csproj" Id="a179d51f-10e9-4688-a1e2-5441bac975b1" />
   </Folder>
   <Folder Name="/workflows/" Id="f40ca3e0-4d7a-4571-a847-0b189e8295f7">
