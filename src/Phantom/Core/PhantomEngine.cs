@@ -11,6 +11,14 @@ namespace Phantom.Core;
 /// </summary>
 public sealed class PhantomEngine : IDisposable
 {
+    internal const string IdentifierProperty = "SDL.app.metadata.identifier";
+    internal const string NameProperty = "SDL.app.metadata.name";
+    internal const string VersionProperty = "SDL.app.metadata.version";
+    internal const string AuthorProperty = "SDL.app.metadata.creator";
+    internal const string CopyrightProperty = "SDL.app.metadata.copyright";
+    internal const string UrlProperty = "SDL.app.metadata.url";
+    internal const string TypeProperty = "SDL.app.metadata.type";
+
     private static readonly Lock _lock = new();
 
     private static PhantomEngine? _instance;
@@ -82,14 +90,16 @@ public sealed class PhantomEngine : IDisposable
     /// You can initialize the same subsystem multiple times. It will only initializes once.
     /// </remarks>
     /// <param name="subSystem">The subsystem to initialize.</param>
+    /// <param name="metadata">The metadata of the application.</param>
     /// <returns>An instance of <see cref="PhantomEngine"/>.</returns>
     /// <exception cref="PhantomException">Failed to initialize the subsystem.</exception>
-    public static PhantomEngine Init(SubSystem subSystem)
+    public static PhantomEngine Init(SubSystem subSystem, AppMetadata? metadata = null)
     {
         lock (_lock)
         {
             _instance ??= new PhantomEngine();
 
+            SetAppMetadata(metadata);
             InternalInit(subSystem);
 
             return _instance;
@@ -100,7 +110,7 @@ public sealed class PhantomEngine : IDisposable
     /// Initialize specific subsystems.
     /// </summary>
     /// <remarks>
-    /// You should call <see cref="Init(SubSystem)"/> before using this method to initialize the engine.
+    /// You should call <see cref="Init(SubSystem, AppMetadata)"/> before using this method to initialize the engine.
     /// </remarks>
     /// <param name="subSystem">The subsystem to initialize.</param>
     /// <exception cref="PhantomEngine">Failed to initialize the subsystem.</exception>
@@ -124,7 +134,7 @@ public sealed class PhantomEngine : IDisposable
     /// Quit the specified <see cref="SubSystem"/>.
     /// </summary>
     /// <remarks>
-    /// <para>You should call <see cref = "Init(SubSystem)" /> before calling this method to make sure the SDL is initialized.</para>
+    /// <para>You should call <see cref = "Init(SubSystem, AppMetadata)" /> before calling this method to make sure the SDL is initialized.</para>
     /// <para>You can shut down the same subsystem multiple times. It will only shut down once.</para>
     /// You still need to call <see cref="Dispose" /> or <see langword="using"/> even if you close all subsystems.
     /// </remarks>
@@ -143,6 +153,30 @@ public sealed class PhantomEngine : IDisposable
 
             _subSystems &= ~subSystem;
         }
+    }
+
+    private static void SetAppMetadata(AppMetadata? metadata)
+    {
+        if (metadata is null)
+            return;
+
+        if (!string.IsNullOrEmpty(metadata.Id))
+            SDLNative.SDL_SetAppMetadataProperty(IdentifierProperty, metadata.Id);
+
+        if (!string.IsNullOrEmpty(metadata.Name))
+            SDLNative.SDL_SetAppMetadataProperty(NameProperty, metadata.Name);
+
+        if (!string.IsNullOrEmpty(metadata.Version))
+            SDLNative.SDL_SetAppMetadataProperty(VersionProperty, metadata.Version);
+
+        if (!string.IsNullOrEmpty(metadata.Author))
+            SDLNative.SDL_SetAppMetadataProperty(AuthorProperty, metadata.Author);
+
+        if (metadata.Url is not null)
+            SDLNative.SDL_SetAppMetadataProperty(UrlProperty, metadata.Url.ToString());
+
+        if (!string.IsNullOrEmpty(metadata.Type))
+            SDLNative.SDL_SetAppMetadataProperty(TypeProperty, metadata.Type);
     }
 
     private static void InternalInit(SubSystem subSystem)

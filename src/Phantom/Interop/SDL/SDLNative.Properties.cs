@@ -43,6 +43,11 @@ internal static partial class SDLNative
     [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf8)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [return: MarshalAs(UnmanagedType.I1)]
+    internal static partial bool SDL_SetAppMetadataProperty(string name, string value);
+
+    [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf8)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    [return: MarshalAs(UnmanagedType.I1)]
     internal static partial bool SDL_SetBooleanProperty(uint propertiesId, string name, [MarshalAs(UnmanagedType.I1)] bool value);
 
     [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf8)]
