@@ -11,35 +11,35 @@ namespace Phantom.Interop.SDL;
 
 internal static partial class SDLNative
 {
-    internal const string Name = "SDL3";
+    internal const string LibraryName = "SDL3";
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     internal static partial void SDL_ClearError();
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [return: MarshalUsing(typeof(SDLOwnedStringMarshaller))]
     internal static partial string SDL_GetError();
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     internal static partial ulong SDL_GetTicks();
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     internal static partial int SDL_GetVersion();
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [return: MarshalAs(UnmanagedType.I1)]
     internal static partial bool SDL_InitSubSystem(SubSystem subSystem);
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     internal static partial void SDL_QuitSubSystem(SubSystem subSystem);
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     internal static partial void SDL_Quit();
 }

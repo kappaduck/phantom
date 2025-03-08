@@ -16,7 +16,7 @@ internal static partial class SDLNative
 
     internal static void Free(nint memory) => SDL_free(memory);
 
-    [LibraryImport(Name)]
+    [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     private static partial void SDL_free(nint memory);
 }
