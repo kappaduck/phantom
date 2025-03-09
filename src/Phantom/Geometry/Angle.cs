@@ -85,14 +85,14 @@ public readonly struct Angle :
     /// Multiplies an angle by a scalar.
     /// </summary>
     /// <param name="left">The angle.</param>
-    /// <param name="right">The scalar.</param>
+    /// <param name="right">Scalar to multiply by.</param>
     /// <returns>The product of the angle and the scalar.</returns>
     public static Angle operator *(Angle left, float right) => new(left.Radians * right);
 
     /// <summary>
     /// Multiplies an angle by a scalar.
     /// </summary>
-    /// <param name="left">The scalar.</param>
+    /// <param name="left">Scalar to multiply by.</param>
     /// <param name="right">The angle.</param>
     /// <returns>The product of the angle and the scalar.</returns>
     public static Angle operator *(float left, Angle right) => new(left * right.Radians);
@@ -101,7 +101,7 @@ public readonly struct Angle :
     /// Divides an angle by a scalar.
     /// </summary>
     /// <param name="left">The angle.</param>
-    /// <param name="right">The scalar.</param>
+    /// <param name="right">Scalar to divide by.</param>
     /// <returns>The quotient of the angle and the scalar.</returns>
     public static Angle operator /(Angle left, float right)
     {
