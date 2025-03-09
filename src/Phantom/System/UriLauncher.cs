@@ -26,7 +26,7 @@ public static class UriLauncher
     /// Open a URL/URI in the system's default web browser or other appropriate external application.
     /// </summary>
     /// <param name="url">The URL/URI to open.</param>
-    public static void Open(string url) => SDLException.ThrowIf(!SDLNative.SDL_OpenURL(url));
+    public static void Open(string url) => SDLException.ThrowIfFailed(SDLNative.SDL_OpenURL(url));
 
     /// <inheritdoc cref="Open(string)"/>
     public static void Open(Uri uri) => Open(uri.ToString());
