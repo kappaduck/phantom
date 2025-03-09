@@ -50,6 +50,9 @@ public sealed class SDLException : Exception
 
     internal static void ThrowIfNegative(int value) => ThrowIf(int.IsNegative(value));
 
+    internal static unsafe void ThrowIfNull<T>(T* value) where T : unmanaged
+        => ThrowIf(value is null);
+
     internal static void ThrowIfZero(uint value) => ThrowIf(value == 0);
 
     [DoesNotReturn]

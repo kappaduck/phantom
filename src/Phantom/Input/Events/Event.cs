@@ -18,6 +18,12 @@ public struct Event
     public readonly EventType Type;
 
     /// <summary>
+    /// The display event data.
+    /// </summary>
+    [FieldOffset(0)]
+    public readonly DisplayEvent Display;
+
+    /// <summary>
     /// The keyboard device event data.
     /// </summary>
     [FieldOffset(0)]
