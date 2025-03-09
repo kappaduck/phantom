@@ -46,6 +46,8 @@ public sealed class SDLException : Exception
             Throw();
     }
 
+    internal static void ThrowIfFailed(bool result) => ThrowIf(!result);
+
     internal static void ThrowIfZero(uint value) => ThrowIf(value == 0);
 
     [DoesNotReturn]

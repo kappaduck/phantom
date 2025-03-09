@@ -24,7 +24,19 @@ Phantom currently supports Windows, with Linux and WebAssembly support planned f
 
 ## Installation
 
-*Work in progress...*
+Phantom is available as a NuGet package. You can install it using the following command:
+
+```bash
+dotnet add package Phantom -v 0.1.0
+```
+
+or by adding the following line to your `.csproj` file:
+
+```xml
+<PackageReference Include="Phantom" Version="0.1.0" />
+```
+
+or by using the Visual Studio NuGet Package Manager.
 
 ## Usage
 

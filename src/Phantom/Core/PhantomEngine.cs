@@ -187,7 +187,7 @@ public sealed class PhantomEngine : IDisposable
             return;
         }
 
-        SDLException.ThrowIf(!SDLNative.SDL_InitSubSystem(subSystem));
+        SDLException.ThrowIfFailed(SDLNative.SDL_InitSubSystem(subSystem));
 
         Interlocked.Increment(ref _refCount);
 
