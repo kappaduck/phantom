@@ -48,6 +48,8 @@ public sealed class SDLException : Exception
 
     internal static void ThrowIfFailed(bool result) => ThrowIf(!result);
 
+    internal static void ThrowIfNegative(int value) => ThrowIf(int.IsNegative(value));
+
     internal static void ThrowIfZero(uint value) => ThrowIf(value == 0);
 
     [DoesNotReturn]
