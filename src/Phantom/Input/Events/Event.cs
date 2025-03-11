@@ -59,6 +59,12 @@ public struct Event
     [FieldOffset(0)]
     public readonly MouseWheelEvent Wheel;
 
+    /// <summary>
+    /// The window event data.
+    /// </summary>
+    [FieldOffset(0)]
+    public readonly WindowEvent Window;
+
     [FieldOffset(0)]
     private unsafe fixed byte _padding[128];
 }

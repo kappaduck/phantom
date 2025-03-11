@@ -5,6 +5,7 @@ using Phantom.Exceptions;
 using Phantom.Geometry;
 using Phantom.Input.Events;
 using Phantom.Interop.SDL;
+using Phantom.Windows;
 using System.Runtime.InteropServices;
 
 namespace Phantom.Input;
@@ -30,7 +31,7 @@ public sealed class Mouse
     /// <para>To query the platform for immediate asynchronous state, use <see cref="GlobalState"/>.</para>
     /// <para>
     /// In relative mode, the platform-cursor's position usually contradicts the SDL-cursor's position as
-    /// manually calculated from <see cref="CachedState"/> and <see cref="BaseWindow.Position"/>.
+    /// manually calculated from <see cref="CachedState"/> and <see cref="Window.Position"/>.
     /// </para>
     /// </remarks>
     public static State CachedState
@@ -52,7 +53,7 @@ public sealed class Mouse
     /// </para>
     /// <para>
     /// In relative mode, the platform-cursor's position usually contradicts the SDL-cursor's position as
-    /// manually calculated from <see cref="CachedState"/> and <see cref="BaseWindow.Position"/>.
+    /// manually calculated from <see cref="CachedState"/> and <see cref="Window.Position"/>.
     /// </para>
     /// </remarks>
     public static State GlobalState
