@@ -4,6 +4,7 @@
 using Phantom.Exceptions;
 using Phantom.Input.Events;
 using Phantom.Interop.SDL;
+using Phantom.Windows;
 using System.Text;
 
 namespace Phantom.Input;
@@ -133,7 +134,7 @@ public sealed partial class Keyboard
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Uses <see cref="BaseWindow.Poll(out Event)"/>, <see cref="EventManager.Poll(out Event)"/> or <see cref="EventManager.Pump"/>
+    /// Uses <see cref="Window.Poll(out Event)"/>, <see cref="EventManager.Poll(out Event)"/> or <see cref="EventManager.Pump"/>
     /// to update the keyboard state.
     /// </para>
     /// <para>
