@@ -2,7 +2,7 @@
 // The source code is licensed under MIT License.
 
 using Phantom.Geometry;
-using Phantom.Graphics.Colors;
+using Phantom.Graphics.Pixels;
 using Phantom.Interop.SDL.Handles;
 using Phantom.Video.Displays;
 using Phantom.Windows;

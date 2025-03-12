@@ -1,7 +1,7 @@
 // Copyright (c) KappaDuck. All rights reserved.
 // The source code is licensed under MIT License.
 
-using Phantom.Graphics.Colors;
+using Phantom.Graphics.Pixels;
 using System.Runtime.InteropServices;
 
 namespace Phantom.Video.Displays;
