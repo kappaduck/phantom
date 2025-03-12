@@ -1,7 +1,7 @@
 // Copyright (c) KappaDuck. All rights reserved.
 // The source code is licensed under MIT License.
 
-namespace Phantom.Graphics.Colors;
+namespace Phantom.Graphics.Pixels;
 
 /// <summary>
 /// Represents the format of a pixel.

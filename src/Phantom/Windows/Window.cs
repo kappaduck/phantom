@@ -3,7 +3,7 @@
 
 using Phantom.Exceptions;
 using Phantom.Geometry;
-using Phantom.Graphics.Colors;
+using Phantom.Graphics.Pixels;
 using Phantom.Input.Events;
 using Phantom.Interop.SDL;
 using Phantom.Interop.SDL.Handles;
