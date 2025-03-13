@@ -20,4 +20,7 @@ while (window.IsOpen)
             return;
         }
     }
+
+    window.Clear();
+    window.Render();
 }

@@ -11,19 +11,19 @@ internal readonly struct SDL_FColor
 {
     internal SDL_FColor(byte r, byte g, byte b, byte a)
     {
-        _r = r;
-        _g = g;
-        _b = b;
-        _a = a;
+        _r = r / 255f;
+        _g = g / 255f;
+        _b = b / 255f;
+        _a = a / 255f;
     }
 
-    private readonly byte _r;
-    private readonly byte _g;
-    private readonly byte _b;
-    private readonly byte _a;
+    private readonly float _r;
+    private readonly float _g;
+    private readonly float _b;
+    private readonly float _a;
 
     /// <summary>
     /// Gets the color.
     /// </summary>
-    internal Color Color => Color.FromArgb(_a, _r, _g, _b);
+    internal Color Color => Color.FromArgb((int)(_a * 255), (int)(_r * 255), (int)(_g * 255), (int)(_b * 255));
 }
