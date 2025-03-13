@@ -2,12 +2,13 @@
 // The source code is licensed under MIT License.
 
 using Phantom.Core;
+using Phantom.Graphics.Rendering;
 using Phantom.Input.Events;
 using Phantom.Windows;
 
 using PhantomEngine engine = PhantomEngine.Init(SubSystem.Video);
 
-using Window window = new("Hello, Phantom!", 1080, 720, WindowOptions.Resizable);
+using RenderWindow window = new("Hello, Phantom!", 1080, 720, WindowOptions.Resizable);
 
 while (window.IsOpen)
 {

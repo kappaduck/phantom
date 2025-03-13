@@ -7,23 +7,13 @@ using System.Runtime.InteropServices;
 
 namespace Phantom.Interop.SDL.Handles;
 
-internal sealed partial class WindowHandle : SafeHandleZeroInvalid
+internal sealed partial class RendererHandle() : SafeHandleZeroInvalid(ownsHandle: true)
 {
-    /// <summary>
-    /// Marshaller needs a public parameterless constructor.
-    /// </summary>
-    public WindowHandle() : base(ownsHandle: true)
-    {
-    }
-
-    internal WindowHandle(WindowHandle window) : base(ownsHandle: false)
-        => SetHandle(window.handle);
-
-    internal static WindowHandle Zero { get; } = new();
+    internal static RendererHandle Zero { get; } = new();
 
     protected override bool ReleaseHandle()
     {
-        SDL_DestroyWindow(handle);
+        SDL_DestroyRenderer(handle);
 
         SetHandle(nint.Zero);
         SetHandleAsInvalid();
@@ -33,5 +23,5 @@ internal sealed partial class WindowHandle : SafeHandleZeroInvalid
 
     [LibraryImport(SDLNative.LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
-    private static partial void SDL_DestroyWindow(nint window);
+    private static partial void SDL_DestroyRenderer(nint renderer);
 }

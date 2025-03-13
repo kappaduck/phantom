@@ -18,7 +18,7 @@ namespace Phantom.Windows;
 /// <remarks>
 /// You can inherits this class to implement a graphic window using graphics APIs like OpenGL or Vulkan.
 /// </remarks>
-public class Window : IDisposable
+public abstract class Window : IDisposable
 {
     private WindowHandle _handle;
     private WindowOptions _options;
@@ -33,7 +33,7 @@ public class Window : IDisposable
     /// <summary>
     /// Initializes a new instance of <see cref="Window"/>.
     /// </summary>
-    public Window()
+    protected Window()
     {
         _handle = WindowHandle.Zero;
         Opacity = 1.0f;
@@ -48,7 +48,7 @@ public class Window : IDisposable
     /// <param name="width">The width of the window.</param>
     /// <param name="height">The height of the window.</param>
     /// <param name="options">The initial options of the window.</param>
-    public Window(string title, int width, int height, WindowOptions options = WindowOptions.None)
+    protected Window(string title, int width, int height, WindowOptions options = WindowOptions.None)
     {
         _handle = InternalCreate(title, width, height, options);
         IsOpen = true;
