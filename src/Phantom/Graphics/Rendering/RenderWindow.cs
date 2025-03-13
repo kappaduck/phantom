@@ -196,6 +196,12 @@ public sealed class RenderWindow : Window, IRenderTarget
     }
 
     /// <inheritdoc/>
+    public void Draw(IDrawable drawable) => Draw(drawable, RenderState.Default);
+
+    /// <inheritdoc/>
+    public void Draw(IDrawable drawable, in RenderState state) => drawable.Draw(this, state);
+
+    /// <inheritdoc/>
     public void Draw(ReadOnlySpan<Vertex> vertices) => Draw(vertices, RenderState.Default);
 
     /// <inheritdoc/>

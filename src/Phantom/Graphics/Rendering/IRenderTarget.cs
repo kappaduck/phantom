@@ -2,6 +2,7 @@
 // The source code is licensed under MIT License.
 
 using Phantom.Geometry;
+using Phantom.Graphics.Drawing;
 using Phantom.Graphics.Primitives;
 using Phantom.Input.Events;
 using System.Drawing;
@@ -23,6 +24,19 @@ public interface IRenderTarget
     /// </summary>
     /// <param name="color">The color to clear the render target with.</param>
     void Clear(Color color);
+
+    /// <summary>
+    /// Draws the specified drawable to the render target.
+    /// </summary>
+    /// <param name="drawable">The drawable to draw to the render target.</param>
+    void Draw(IDrawable drawable);
+
+    /// <summary>
+    /// Draws the specified drawable to the render target.
+    /// </summary>
+    /// <param name="drawable">The drawable to draw to the render target.</param>
+    /// <param name="state">The render state to use when drawing the object.</param>
+    void Draw(IDrawable drawable, in RenderState state);
 
     /// <summary>
     /// Draws the specified vertices to the render target.
