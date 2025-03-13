@@ -4,16 +4,19 @@
 using Phantom.Exceptions;
 using Phantom.Geometry;
 using Phantom.Graphics.Drawing;
+using Phantom.Graphics.Primitives;
+using Phantom.Input.Events;
 using Phantom.Interop.SDL;
 using Phantom.Interop.SDL.Handles;
 using Phantom.Windows;
+using System.Drawing;
 
 namespace Phantom.Graphics.Rendering;
 
 /// <summary>
 /// Represents a window that can be used to render 2D graphics using SDL Renderer API.
 /// </summary>
-public sealed class RenderWindow : Window
+public sealed class RenderWindow : Window, IRenderTarget
 {
     private RendererHandle _renderer = RendererHandle.Zero;
 
@@ -179,6 +182,63 @@ public sealed class RenderWindow : Window
     }
 
     /// <inheritdoc/>
+    /// <remarks>
+    /// The render target is cleared with a black color.
+    /// If you want to clear the render target with a different color, use <see cref="Clear(Color)"/> instead.
+    /// </remarks>
+    public void Clear() => Clear(Color.Black);
+
+    /// <inheritdoc/>
+    public void Clear(Color color)
+    {
+        SDLNative.SDL_SetRenderDrawColor(_renderer, color.R, color.G, color.B, color.A);
+        SDLNative.SDL_RenderClear(_renderer);
+    }
+
+    /// <inheritdoc/>
+    public void Draw(ReadOnlySpan<Vertex> vertices) => Draw(vertices, RenderState.Default);
+
+    /// <inheritdoc/>
+    public void Draw(ReadOnlySpan<Vertex> vertices, in RenderState state)
+    {
+        ApplyState(state);
+        SDLNative.SDL_RenderGeometry(_renderer, nint.Zero, vertices, vertices.Length, [], 0);
+    }
+
+    /// <inheritdoc/>
+    public void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices) => Draw(vertices, indices, RenderState.Default);
+
+    /// <inheritdoc/>
+    public void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices, in RenderState state)
+    {
+        ApplyState(state);
+        SDLNative.SDL_RenderGeometry(_renderer, nint.Zero, vertices, vertices.Length, indices, indices.Length);
+    }
+
+    /// <inheritdoc/>
+    public void MapEventToCoordinates(ref Event e)
+        => SDLNative.SDL_ConvertEventToRenderCoordinates(_renderer, ref e);
+
+    /// <inheritdoc/>
+    public Vector2 MapPixelsToCoordinates(Vector2 point)
+    {
+        SDLNative.SDL_RenderCoordinatesFromWindow(_renderer, point.X, point.Y, out float x, out float y);
+        return new Vector2(x, y);
+    }
+
+    /// <inheritdoc/>
+    public Vector2 MapCoordinatesToPixels(Vector2 point)
+    {
+        SDLNative.SDL_RenderCoordinatesToWindow(_renderer, point.X, point.Y, out float x, out float y);
+        return new Vector2(x, y);
+    }
+
+    /// <summary>
+    /// Renders all the graphics to the window since the last call.
+    /// </summary>
+    public void Render() => SDLNative.SDL_RenderPresent(_renderer);
+
+    /// <inheritdoc/>
     protected override void Dispose(bool disposing)
     {
         if (disposing)
@@ -195,5 +255,22 @@ public sealed class RenderWindow : Window
 
         SDLException.ThrowIfFailed(SDLNative.SDL_SetRenderVSync(_renderer, VSync));
         SDLException.ThrowIfFailed(SDLNative.SDL_SetRenderLogicalPresentation(_renderer, Presentation.Width, Presentation.Height, Presentation.Mode));
+    }
+
+    private void ApplyState(in RenderState state)
+    {
+        if (state.BlendMode.HasValue)
+            SDLNative.SDL_SetRenderDrawBlendMode(_renderer, state.BlendMode.Value);
+
+        if (state.Scale.HasValue)
+        {
+            Vector2 scale = state.Scale.Value;
+            SDLNative.SDL_SetRenderScale(_renderer, scale.X, scale.Y);
+        }
+
+        if (state.ColorScale.HasValue)
+            SDLNative.SDL_SetRenderColorScale(_renderer, state.ColorScale.Value);
+
+        SDLNative.SetRenderClip(_renderer, state.Clip);
     }
 }

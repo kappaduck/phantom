@@ -3,6 +3,9 @@
 
 using Phantom.Geometry;
 using Phantom.Graphics.Drawing;
+using Phantom.Graphics.Drawing.BlendModes;
+using Phantom.Graphics.Primitives;
+using Phantom.Input.Events;
 using Phantom.Interop.SDL.Handles;
 using Phantom.Interop.SDL.Marshallers;
 using System.Runtime.CompilerServices;
@@ -13,6 +16,22 @@ namespace Phantom.Interop.SDL;
 
 internal static partial class SDLNative
 {
+    internal static unsafe void SetRenderClip(RendererHandle renderer, RectInt? value)
+    {
+        if (value is null)
+        {
+            SDL_SetRenderClipRect(renderer, rect: null);
+            return;
+        }
+
+        RectInt rect = value.Value;
+        SDL_SetRenderClipRect(renderer, &rect);
+    }
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_ConvertEventToRenderCoordinates(RendererHandle renderer, ref Event e);
+
     [LibraryImport(LibraryName, StringMarshalling = StringMarshalling.Utf8)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     internal static partial RendererHandle SDL_CreateRenderer(SafeHandle window, string? name = null);
@@ -48,8 +67,48 @@ internal static partial class SDLNative
 
     [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_RenderClear(RendererHandle renderer);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_RenderCoordinatesFromWindow(RendererHandle renderer, float windowX, float windowY, out float x, out float y);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_RenderCoordinatesToWindow(RendererHandle renderer, float x, float y, out float windowX, out float windowY);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_RenderGeometry(RendererHandle renderer, nint texture, ReadOnlySpan<Vertex> vertices, int numVertices, ReadOnlySpan<int> indices, int numIndices);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_RenderPresent(RendererHandle renderer);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static unsafe partial void SDL_SetRenderClipRect(RendererHandle renderer, RectInt* rect);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_SetRenderColorScale(RendererHandle renderer, float scale);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_SetRenderDrawBlendMode(RendererHandle renderer, BlendMode blendMode);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_SetRenderDrawColor(RendererHandle renderer, byte r, byte g, byte b, byte a);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
     [return: MarshalAs(UnmanagedType.I1)]
     internal static partial bool SDL_SetRenderLogicalPresentation(RendererHandle renderer, int w, int h, LogicalPresentation mode);
+
+    [LibraryImport(LibraryName)]
+    [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+    internal static partial void SDL_SetRenderScale(RendererHandle renderer, float scaleX, float scaleY);
 
     [LibraryImport(LibraryName)]
     [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
