@@ -5,6 +5,7 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>boo</ToolCommandName>
+    <Version>0.1.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>

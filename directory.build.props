@@ -24,7 +24,6 @@
     <Authors>KappaDuck</Authors>
     <Company>@(Authors)</Company>
     <Copyright>Copyright © KappaDuck $([System.DateTime]::Now.Year)</Copyright>
-    <Version>0.1.0</Version>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseFile>license</PackageLicenseFile>
     <PackageReleaseNotes>changelog.md</PackageReleaseNotes>

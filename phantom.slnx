@@ -36,6 +36,7 @@
   </Folder>
   <Folder Name="/workflows/" Id="f40ca3e0-4d7a-4571-a847-0b189e8295f7">
     <File Path=".github/dependabot.yml" />
+    <File Path=".github/workflows/nuget.yml" />
     <File Path=".github/workflows/pull-request.yml" />
   </Folder>
   <Project Path="src/Phantom.Demo/Phantom.Demo.csproj" />
