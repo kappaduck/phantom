@@ -1,27 +1,25 @@
 name: Publish Phantom NuGet Package
 
 on:
-  pull_request:
-    branches: [main]
-
-env:
-  project: .\src\Phantom\Phantom.csproj
+  release:
+    types: [published]
 
 jobs:
   build:
     name: Build
-    runs-on: windows-2025
+    runs-on: windows-latest
+    env:
+      project: .\src\Phantom\Phantom.csproj
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Get version
-        id: version
-        run: echo "name=version::${GITHUB_REF#refs/tags/v}" >> "$GITHUB_ENV"
-
-      - name: Display version
-        run: echo ${{ env.version }}
+        run: |
+          $tag = ${{ github.event.release.tag_name }}
+          $version = $tag -replace '^v', ''
+          echo "version=$version" >> $GITHUB_ENV
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -38,5 +36,23 @@ jobs:
       - name: Pack
         run: dotnet pack ${{ env.project }} -c release --no-build --no-restore --output .\artifacts -p:PackageVersion=${{ env.version }}
 
-      - name: Display artifacts
-        run: ls .\artifacts
+      - name: Publish to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: phantom-nuget
+          path: .\artifacts\*.nupkg
+
+  deploy:
+    name: Deploy
+    runs-on: windows-2025
+    needs: build
+    environment: nuget
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: phantom-nuget
+
+      - name: Publish to NuGet
+        run: dotnet nuget push .\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
