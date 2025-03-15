@@ -32,13 +32,6 @@ public interface IRenderTarget
     void Draw(IDrawable drawable);
 
     /// <summary>
-    /// Draws the specified drawable to the render target.
-    /// </summary>
-    /// <param name="drawable">The drawable to draw to the render target.</param>
-    /// <param name="state">The render state to use when drawing the object.</param>
-    void Draw(IDrawable drawable, in RenderState state);
-
-    /// <summary>
     /// Draws the specified vertices to the render target.
     /// </summary>
     /// <param name="vertices">The vertices to draw to the render target.</param>
@@ -48,23 +41,8 @@ public interface IRenderTarget
     /// Draws the specified vertices to the render target.
     /// </summary>
     /// <param name="vertices">The vertices to draw to the render target.</param>
-    /// <param name="state">The render state to use when drawing the object.</param>
-    void Draw(ReadOnlySpan<Vertex> vertices, in RenderState state);
-
-    /// <summary>
-    /// Draws the specified vertices to the render target.
-    /// </summary>
-    /// <param name="vertices">The vertices to draw to the render target.</param>
     /// <param name="indices">The indices to draw the vertices in the correct order.</param>
     void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices);
-
-    /// <summary>
-    /// Draws the specified vertices to the render target.
-    /// </summary>
-    /// <param name="vertices">The vertices to draw to the render target.</param>
-    /// <param name="indices">The indices to draw the vertices in the correct order.</param>
-    /// <param name="state">The render state to use when drawing the object.</param>
-    void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices, in RenderState state);
 
     /// <summary>
     /// Maps the event coordinates to the render target coordinates.
