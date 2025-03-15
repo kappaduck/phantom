@@ -14,6 +14,5 @@ public interface IDrawable
     /// Draws the object to the specified render target.
     /// </summary>
     /// <param name="target">The render target to draw the object to.</param>
-    /// <param name="state">The render state to use when drawing the object.</param>
-    void Draw(IRenderTarget target, in RenderState state);
+    void Draw(IRenderTarget target);
 }

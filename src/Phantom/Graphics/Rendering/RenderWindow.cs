@@ -196,30 +196,15 @@ public sealed class RenderWindow : Window, IRenderTarget
     }
 
     /// <inheritdoc/>
-    public void Draw(IDrawable drawable) => Draw(drawable, RenderState.Default);
+    public void Draw(IDrawable drawable) => drawable.Draw(this);
 
     /// <inheritdoc/>
-    public void Draw(IDrawable drawable, in RenderState state) => drawable.Draw(this, state);
+    public void Draw(ReadOnlySpan<Vertex> vertices)
+        => SDLNative.SDL_RenderGeometry(_renderer, IntPtr.Zero, vertices, vertices.Length, [], 0);
 
     /// <inheritdoc/>
-    public void Draw(ReadOnlySpan<Vertex> vertices) => Draw(vertices, RenderState.Default);
-
-    /// <inheritdoc/>
-    public void Draw(ReadOnlySpan<Vertex> vertices, in RenderState state)
-    {
-        ApplyState(state);
-        SDLNative.SDL_RenderGeometry(_renderer, nint.Zero, vertices, vertices.Length, [], 0);
-    }
-
-    /// <inheritdoc/>
-    public void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices) => Draw(vertices, indices, RenderState.Default);
-
-    /// <inheritdoc/>
-    public void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices, in RenderState state)
-    {
-        ApplyState(state);
-        SDLNative.SDL_RenderGeometry(_renderer, nint.Zero, vertices, vertices.Length, indices, indices.Length);
-    }
+    public void Draw(ReadOnlySpan<Vertex> vertices, ReadOnlySpan<int> indices)
+        => SDLNative.SDL_RenderGeometry(_renderer, IntPtr.Zero, vertices, vertices.Length, indices, indices.Length);
 
     /// <inheritdoc/>
     public void MapEventToCoordinates(ref Event e)
@@ -261,22 +246,5 @@ public sealed class RenderWindow : Window, IRenderTarget
 
         SDLException.ThrowIfFailed(SDLNative.SDL_SetRenderVSync(_renderer, VSync));
         SDLException.ThrowIfFailed(SDLNative.SDL_SetRenderLogicalPresentation(_renderer, Presentation.Width, Presentation.Height, Presentation.Mode));
-    }
-
-    private void ApplyState(in RenderState state)
-    {
-        if (state.BlendMode.HasValue)
-            SDLNative.SDL_SetRenderDrawBlendMode(_renderer, state.BlendMode.Value);
-
-        if (state.Scale.HasValue)
-        {
-            Vector2 scale = state.Scale.Value;
-            SDLNative.SDL_SetRenderScale(_renderer, scale.X, scale.Y);
-        }
-
-        if (state.ColorScale.HasValue)
-            SDLNative.SDL_SetRenderColorScale(_renderer, state.ColorScale.Value);
-
-        SDLNative.SetRenderClip(_renderer, state.Clip);
     }
 }
