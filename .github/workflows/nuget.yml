@@ -1,0 +1,62 @@
+name: Publish Phantom NuGet Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    env:
+      project: .\src\Phantom\Phantom.csproj
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get version
+        run: |
+          $tag = ${{ github.event.release.tag_name }}
+          $version = $tag -replace '^v', ''
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+          dotnet-quality: preview
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.project }}
+
+      - name: Build
+        run: dotnet build ${{ env.project }} -c release --no-restore
+
+      - name: Pack
+        run: dotnet pack ${{ env.project }} -c release --no-build --no-restore --output .\artifacts -p:PackageVersion=${{ env.version }}
+
+      - name: Publish to artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: phantom-nuget
+          path: .\artifacts\*.nupkg
+
+  deploy:
+    name: Deploy
+    runs-on: windows-2025
+    needs: build
+    environment: nuget
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: phantom-nuget
+
+      - name: Publish to NuGet
+        run: dotnet nuget push .\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
