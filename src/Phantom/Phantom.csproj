@@ -9,7 +9,6 @@
 
   <PropertyGroup Label="Package info">
     <Title>$(MSBuildProjectName)</Title>
-    <Version>0.1.0</Version>
     <Description>$(MSBuildProjectName) is a NuGet package build on top of SDL3, designed to provide a clean and modern .NET 9.0+ API.$(MSBuildProjectName) ensures high performance and flexibility for game development and multimedia applications, while abstracting away the low-level details of SDL3 API.</Description>
     <PackageTags>SDL;SDL3;Wrapper;Game;Multimedia</PackageTags>
   </PropertyGroup>
