@@ -19,6 +19,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Get tag version
+        shell: pwsh
+        run: |
+          $tag = "${{ github.event.release.tag_name }}"
+          $version = $tag -replace '^v', ''
+          echo "version=$version" >> $env:GITHUB_ENV
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
@@ -32,7 +39,7 @@ jobs:
         run: dotnet build ${{ env.project }} -c release --no-restore
 
       - name: Pack
-        run: dotnet pack ${{ env.project }} -c release --no-build --no-restore --output .\artifacts
+        run: dotnet pack ${{ env.project }} -c release --no-build --no-restore --output .\artifacts -p:PackageVersion=${{ env.version }}
 
       - name: Publish to artifact
         uses: actions/upload-artifact@v4
